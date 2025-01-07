@@ -55,14 +55,29 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
                     }
                 });
-                //btn.setText(edKey.getText().toString());
                 linear.addView(btn);
-                btnClear.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        linear.removeAllViews();
-                    }
-                });
+            }
+        });
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                linear.removeAllViews();
+                ArrayList<String> keys = new ArrayList<>(dict.keySet());
+                keys.sort(String:compareTo);
+                for(String key:keys)
+                {
+                    Button btn = new Button(MainActivity.this);
+                    btn.setText(edKey.getText().toString());
+                    btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(MainActivity.this,
+                                    dict.get(key.toString()),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    linear.addView(btn);
+                }
             }
         });
     }
