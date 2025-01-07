@@ -55,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
                     }
                 });
+                //btn.setText(edKey.getText().toString());
+                linear.addView(btn);
+                btnClear.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        linear.removeAllViews();
+                    }
+                });
             }
         });
     }
