@@ -62,20 +62,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 linear.removeAllViews();
+
+                // Get the keys from the dictionary and sort them alphabetically
                 ArrayList<String> keys = new ArrayList<>(dict.keySet());
-                keys.sort(String:compareTo);
-                for(String key:keys)
-                {
+                keys.sort(String::compareTo);
+
+                // Iterate over the sorted keys
+                for (String key : keys) {
+                    // Create a new button
                     Button btn = new Button(MainActivity.this);
-                    btn.setText(edKey.getText().toString());
+                    btn.setText(key);  // Set button text to the key
+
+                    // Set an OnClickListener to show the value associated with the key in the dictionary
+                    final String keyFinal = key;  // Use a final variable to access inside the listener
                     btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            // Show a Toast with the value corresponding to the clicked key
                             Toast.makeText(MainActivity.this,
-                                    dict.get(key.toString()),
+                                    dict.get(keyFinal),
                                     Toast.LENGTH_LONG).show();
                         }
                     });
+
+                    // Add the button to the layout
                     linear.addView(btn);
                 }
             }
