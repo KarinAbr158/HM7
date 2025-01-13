@@ -19,7 +19,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     EditText edKey, edValue;
-    Button btnAdd, btnClear;
+    Button btnAdd, btnClear, btnDelete;
 
     ArrayList<Integer> mine = new ArrayList<>();
     LinearLayout linear;
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         edValue = findViewById(R.id.etValue);
         btnAdd = findViewById(R.id.btnAdd);
         btnClear = findViewById(R.id.btnClear);
+        btnDelete = findViewById(R.id.delete);
         linear = findViewById(R.id.llButtons);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -63,31 +64,31 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 linear.removeAllViews();
 
-                // Get the keys from the dictionary and sort them alphabetically
                 ArrayList<String> keys = new ArrayList<>(dict.keySet());
                 keys.sort(String::compareTo);
 
-                // Iterate over the sorted keys
                 for (String key : keys) {
-                    // Create a new button
                     Button btn = new Button(MainActivity.this);
-                    btn.setText(key);  // Set button text to the key
+                    btn.setText(key);
 
-                    // Set an OnClickListener to show the value associated with the key in the dictionary
-                    final String keyFinal = key;  // Use a final variable to access inside the listener
+                    final String keyFinal = key;
                     btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            // Show a Toast with the value corresponding to the clicked key
                             Toast.makeText(MainActivity.this,
                                     dict.get(keyFinal),
                                     Toast.LENGTH_LONG).show();
                         }
                     });
-
-                    // Add the button to the layout
                     linear.addView(btn);
                 }
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dict.remove(edKey.getText().toString());
             }
         });
     }
